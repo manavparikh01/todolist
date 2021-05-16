@@ -35,7 +35,7 @@ var firebaseConfig = {
 //   }
 // }    
 
-    var todoData = firebase.database().ref('todo/');
+    var todoData = firebase.database().ref('todo/todos/');
     todoData.on('value', function(snapshot) {
         
     snapshot.forEach(function(childSnapshot) {
@@ -63,26 +63,28 @@ $("ul").on("click","li span", function(event) {
         console.log(this)
         var message = $(this).text()
         console.log(message)
-        var todoData = firebase.database().ref('todo/');
+        var todoData = firebase.database().ref('todo/todos/');
         todoData.on('value', function(snapshot) {
-            console.log(todoData)
-        console.log(snapshot)
+        // console.log(snapshot)
             snapshot.forEach(function(childSnapshot) {
-                console.log(childSnapshot)
+                //console.log(childSnapshot)
                 var childData = childSnapshot.val()
-                console.log(childData)
-                // console.log("message" + message.trim())
-                // console.log("otherpart" + childData.todo)
+                //console.log(childData)
+                console.log("message" + message.trim())
+                console.log("otherpart" + childData.todo)
                 if (message.trim() == childData.todo) {
-                    // firebase.database().ref('todo/'+childData+'/'+childData.todo).remove(),  (error) => {
-                    //     if (error) {
-                    //         console.log(error)
-                    //         console.log('Some problem')
-                    //     } else {
-                    //         console.log('No problem')
-                    //     }
-                    // }
-                    childSnapshot.val().remove()
+                    // var deleteMan = 'todo/todos/'+childData.todo+'/'+childData.todo
+                    // console.log(deleteMan)
+                    firebase.database().ref('todo/todos/'+childData.todo).remove(),  (error) => {
+                        if (error) {
+                            console.log(error)
+                            console.log('Some problem')
+                        } else {
+                            console.log('No problem')
+                        }
+                    }
+                    $("li").remove()
+                    window.onload()
                 
                 }
                 else {
@@ -106,7 +108,7 @@ $("input[type='text']").keypress(function(event) {
         // todoData.on('value', (snapshot) => {
         // const data = snapshot.val();
         // console.log(data)})
-        firebase.database().ref('todo/').push({
+        firebase.database().ref('todo/todos/'+todoText).set({
             todo: todoText,
         }),  (error) => {
             if (error) {
@@ -118,7 +120,8 @@ $("input[type='text']").keypress(function(event) {
           }
           $("li").remove()
           window.onload()
-            
+          var current = new Date();
+          console.log(current.toLocaleString())
             //event.stopPropogation();
         
     }
