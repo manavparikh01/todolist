@@ -35,19 +35,39 @@ var firebaseConfig = {
 //   }
 // }    
 
+// .orderByChild('currentTime')
+
     var todoData = firebase.database().ref('todo/todos/');
-    todoData.on('value', function(snapshot) {
+    //console.log(todoData.text)
+    // if (todoData == undefined) {
+    //     console.log('no data')
+    //     todoData.on('value', function(snapshot) {
         
-    snapshot.forEach(function(childSnapshot) {
+    //         snapshot.forEach(function(childSnapshot) {
+                
+    //                 var childData = childSnapshot.val()
+              
+    //           $("ul").append("<li><span><i class='fa fa-trash'></i></span>" + " " + childData.todo + "</li>");
+    //             })
+              
+              
+              
+    //         })
+    // } else {
+        todoData.on('value', function(snapshot) {
         
-            var childData = childSnapshot.val()
-      
-      $("ul").append("<li><span><i class='fa fa-trash'></i></span>" + " " + childData.todo + "</li>");
-        })
-      
-      
-      
-    })
+            snapshot.forEach(function(childSnapshot) {
+                
+                    var childData = childSnapshot.val()
+              
+              $("ul").append("<li><span><i class='fa fa-trash'></i></span>" + " " + childData.todo + "</li>");
+                })
+              
+              
+              
+            })
+    //}
+    
 
     //})
    }
@@ -60,9 +80,9 @@ $("ul").on("click","li", function() {
 $("ul").on("click","li span", function(event) {
     console.log(this)
     $(this).parent().fadeOut("slow", function() {
-        console.log(this)
+        //console.log(this)
         var message = $(this).text()
-        console.log(message)
+        //console.log(message)
         var todoData = firebase.database().ref('todo/todos/');
         todoData.on('value', function(snapshot) {
         // console.log(snapshot)
@@ -70,13 +90,14 @@ $("ul").on("click","li span", function(event) {
                 //console.log(childSnapshot)
                 var childData = childSnapshot.val()
                 //console.log(childData)
-                console.log("message" + message.trim())
-                console.log("otherpart" + childData.todo)
-                if (message.trim() == childData.todo) {
+                // console.log("message" + message.trim())
+                // console.log("otherpart" + childData.todo)
+                //if (message.trim() == childData.todo.trim()) {
                     // var deleteMan = 'todo/todos/'+childData.todo+'/'+childData.todo
                     // console.log(deleteMan)
-                    firebase.database().ref('todo/todos/'+childData.todo).remove(),  (error) => {
+                    firebase.database().ref('todo/todos/'+message.trim()).remove(),  (error) => {
                         if (error) {
+                            alert('Some error occured')
                             console.log(error)
                             console.log('Some problem')
                         } else {
@@ -86,12 +107,13 @@ $("ul").on("click","li span", function(event) {
                     $("li").remove()
                     window.onload()
                 
-                }
-                else {
-                    console.log("commonman")
-                }
+                //}
+                //else {
+                //    
+                //}
             })
         })
+        //window.onload()
         $(this).remove();
     });
     
@@ -108,10 +130,15 @@ $("input[type='text']").keypress(function(event) {
         // todoData.on('value', (snapshot) => {
         // const data = snapshot.val();
         // console.log(data)})
-        firebase.database().ref('todo/todos/'+todoText).set({
+        // var current = new Date();
+        // var currentTime = current.toLocaleString()
+        var todoTesting = todoText.trim()
+        firebase.database().ref('todo/todos/'+todoTesting).set({
             todo: todoText,
+            //time: currentTime,
         }),  (error) => {
             if (error) {
+                alert('Some error occured')
                 console.log(error)
               console.log('Some problem')
             } else {
@@ -120,8 +147,8 @@ $("input[type='text']").keypress(function(event) {
           }
           $("li").remove()
           window.onload()
-          var current = new Date();
-          console.log(current.toLocaleString())
+          
+          
             //event.stopPropogation();
         
     }
