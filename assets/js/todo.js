@@ -1,11 +1,21 @@
-var firebaseConfig = {
-    apiKey: "AIzaSyArdMmWnre6wMjkP-jElLmkp1QZpNdJIiE",
-    authDomain: "jsfire-ea4c8.firebaseapp.com",
-    projectId: "jsfire-ea4c8",
-    storageBucket: "jsfire-ea4c8.appspot.com",
-    messagingSenderId: "610319658281",
-    appId: "1:610319658281:web:ad6f6c07def73101841b38",
-    measurementId: "G-W44X6GT3JL"
+// var firebaseConfig = {
+//     apiKey: "AIzaSyArdMmWnre6wMjkP-jElLmkp1QZpNdJIiE",
+//     authDomain: "jsfire-ea4c8.firebaseapp.com",
+//     projectId: "jsfire-ea4c8",
+//     storageBucket: "jsfire-ea4c8.appspot.com",
+//     messagingSenderId: "610319658281",
+//     appId: "1:610319658281:web:ad6f6c07def73101841b38",
+//     measurementId: "G-W44X6GT3JL"
+//   };
+  const firebaseConfig = {
+    apiKey: "AIzaSyDoJPzy2IbviluLlJa1EPDqaidp6ee6CdI",
+    authDomain: "firsttry-a96b2.firebaseapp.com",
+    databaseURL: "https://firsttry-a96b2-default-rtdb.firebaseio.com",
+    projectId: "firsttry-a96b2",
+    storageBucket: "firsttry-a96b2.appspot.com",
+    messagingSenderId: "129622475687",
+    appId: "1:129622475687:web:d7fff228fc142b22c7ac82",
+    measurementId: "G-5Q6QSRRMTD"
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
